@@ -172,8 +172,10 @@ Update quote in the database based on query with whatever is in quote calling `c
 #### db.js
 
 ##### `connect(cb)`
-##### clearDb()
-    clears the database used largely in testing.
+Connects to database then call callback passing db
+
+##### `clearDb(cb)`
+clears the database used largely in testing. then call callback
 
 #### API
 
@@ -192,5 +194,78 @@ You need to write tests as well as run a coverage test suit
 
 You will need to add your dependencies in package.json
 
-> The quote test should test all functioninstaled and even those rehected
+for this assignemnt you will as a minimum use `mocha`, `instanbule` and `mongodb` packages
+
+I recommend `chai` for behavioral testing
+
+> The quote test should test all functions in quote.js
+
+to test the random selection you can assert that the returned quote is one of the quotes you can get from quotes.json
+
+you can read a json file using require `require('quotes.js')`
+
+
+you will need to clear the database before you run tests
+
+you can do this by calling `before(db.clearDB)` assuming you have the following
+
+
+```
+// db.js
+
+var mongo = require('mongodb').MongoClient;
+var DB = null;
+var dbURL = 'mongodb://localhost:27017/quotes';
+
+exports.connect = function(cb) {
+    if (DB) {
+        return cb(DB);
+    }
+    return mongo.connect(dbURL).then(function(db) {
+        console.log('connected to db');
+        DB = db;
+        if (cb) cb(null, db);
+        else return db;
+    });
+};
+
+exports.db = function() {
+    if (DB === null) throw Error('DB Object has not yet been initialized');
+    return DB;
+};
+
+
+exports.clearDB = function(done) {
+    DB.listCollections().toArray().then(function (collections) {
+        collections.forEach(function (c) {
+            DB.collection(c.name).removeMany();   
+        });
+        done();
+    }).catch(done);
+};
+
+```
+
+```
+// tests/quotes.js
+
+var assert = require('chai').assert;
+var quotes = require('../quotes.js');
+var db = require('../db.js');
+before(function (done) {
+    db.connect(function (db) {
+        done();
+    }).catch(done);
+});
+
+
+describe('Quotes DB', function () {
+    before(db.clearDB);
+    //....
+});
+describe('Quotes JSON', function () {
+    // ...
+});
+
+```
 
