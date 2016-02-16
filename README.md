@@ -62,6 +62,10 @@ You should minimally windup with the following structure.
 |  |- public/
 |  |  |- js/
 |  |  |  |- jquery.min.js  <------ you can optionally not use this.
+|  |  |  |- main.js        <------ your javascript file
+|  |  |  
+|  |  |- css/
+|  |  |  |- style.css
 |  |  |  
 |  |  |- index.html 
 |  |
@@ -80,7 +84,9 @@ You should minimally windup with the following structure.
 
 You will find in this repo the `.gitignore` and `quotes.json` files everything else you have to create yourself.
 
-- `public/index.html` Should contain the html as well as the styles and javascript need to run the app.
+- `public/js/` Should contain your javascript files.
+- `public/css/` Should contain your css files.
+- `public/index.html` Should contain the html
 - `app.js` contains code that handles the routes and exports the express app.
 - `server.js` contains code that runs the app.
 - `/quotes.js` should contain the functionality related to quotes
@@ -261,11 +267,13 @@ For this assignment you will as a minimum use the npm packages
 
 You can look up the documentation of each of these modules and how to use them on your own.
 
+You don't need to declare a rout for each resource in express you can simply declare a static file directory to server your public folder.
+
 > The quote test should test all functions in quote.js
 
 To test the random selection you can assert that the returned quote is included in one of the quotes you can get from getQuotesFromJSON or when testing the db from getQuotesFromDB
 
-you can read a json file using require `require('../quotes.js')` here I'm assuming quotes.json is one directory up
+You can read a json file using require `require('../quotes.js')` here I'm assuming quotes.json is one directory up
 
 You will need to clear the database before you run the seed test, you can do this by calling `before(db.clearDB)` which is provided by us.
 
