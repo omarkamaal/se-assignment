@@ -41,7 +41,7 @@ Your job is to create a simple test driven inspirational quotes application that
 
 The application should inform the user somehow on how he can use it, in my case I made it so that the first time the app loads starts it says on the screen that you should click/tap
 
-
+A demo that will only work in chrome and basically just looks like what we want you to do can be found [here](http://amrdraz.github.io/inspire-me/)
 
 > If you want to have fun you can modify the data we give you and create your own set of quotes - for example make it an Arabic movie quotes app.
 
