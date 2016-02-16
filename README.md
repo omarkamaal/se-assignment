@@ -53,21 +53,25 @@ The application should inform the user somehow on how he can use it, in my case 
 
 ### File structure
 
-You are to fork the assignment repo and add your own folder with your id.
-You should windup with the following structure.
+You are to __fork__ the assignment repo and add your own folder with your id.
+
+You should minimally windup with the following structure.
 
 ```
-|- cs-16-5240/
+|- 16-5240/
 |  |- public/
+|  |  |- js/
+|  |  |  |- jquery.min.js  <------ you can optionally not use this.
+|  |  |  
 |  |  |- index.html 
 |  |
 |  |- test/
-|  |  |- quote.js
+|  |  |- quote.js          <------ see how kind we are bellow
 |  |
 |  |- app.js
 |  |- server.js
 |  |- quotes.js
-|  |- db.js            <------ this is partially provided bellow
+|  |- db.js                <------ this is partially provided, love us
 |  |- package.json
 |  
 |- quotes.json
