@@ -2,19 +2,22 @@
 
 ## Objective
 
-Demonstrait your mastery of:
+Demonstrate your mastery of:
 
 - running nodejs
 - setting up a mongodb database
+- useing express
 - connecting to the database
 - responding with a file
 - responding with JSON
 - node module syntax (require/export) using the module design pattern
 - npm
 - testing your code
+    - unit
+    - end to end
 - some html
 - some css
-- jquery or just javacript in the broweser
+- jquery or just javacript in the browser
 - ajax
 
 
@@ -34,13 +37,13 @@ We feel SE students will go through harsh trials in the near future, accordingly
 
 ## Task
 
-Your job is to create a simple test driven inspirational quotes application that will show you a new inspirational quote everytime you click on the page as well as the author of the quote in the bottom left, the quote should be loaded using ajax.
+Your job is to create a simple test driven inspirational quotes application that will show you a new inspirational quote every-time you click on the page as well as the author of the quote in the bottom right, the quote should be loaded using ajax.
 
 The application should inform the user somehow on how he can use it, in my case I made it so that the first time the app loads starts it says on the screen that you should click/tap
 
 
 
-> If you want to have fun you can modify the data we give you and create your own set of quotes - for example make it an arabic movie quotes app.
+> If you want to have fun you can modify the data we give you and create your own set of quotes - for example make it an Arabic movie quotes app.
 
 ### UI
 
@@ -50,22 +53,24 @@ The application should inform the user somehow on how he can use it, in my case 
 
 ### File structure
 
-Your app should minimally have the following structure.
+You are to fork the assignment repo and add your own folder with your id.
+You should windup with the following structure.
 
 ```
-| |- public/
-| |  |- index.html 
-| |  |- 404.html 
-| |
-| |- test/
-| |  |- quote.js
-| |
-| |- server.js
-| |- quotes.js
-| |- db.js            <------ this is an example of an optional file
-| |- package.json
-| |- quotes.json
-| |- .gitignore
+|- cs-16-5240/
+|  |- public/
+|  |  |- index.html 
+|  |
+|  |- test/
+|  |  |- quote.js
+|  |
+|  |- server.js
+|  |- quotes.js
+|  |- db.js            <------ this is partially provided bellow
+|  |- package.json
+|  
+|- quotes.json
+|- .gitignore
 ```
 
 You will find in this repo the `.gitignore` and `quotes.json` files everything else you have to create yourself.
@@ -74,17 +79,17 @@ You will find in this repo the `.gitignore` and `quotes.json` files everything e
 - `server.js` contains code that runs the server and handles requests.
 - `/quotes.js` should contain the functionality related to quotes
 - `test/quotes.js` should contain the tests that make sure all functionality in the quotes.js file work.
-- `db.js` In my example this is a file that hold functions for conencting and accessing the database.
+- `db.js` In my example this is a file that hold functions for connecting and accessing the database.
+- `package.json` should contain all your dependencies in addition to your npm scripts; start, test, and coverage.
 
 ### Features
 
 - The app must serve the data from a mongodb database.
 - The app should implement a simple GET API for getting quotes.
-- The app should internally have functionality for adding updating and deleting quotes in addition to getting.
 
 #### quotes.js
 
-Quotes.js shoudl export the following functions
+Quotes.js module should export the following functions
 
 ##### `getElementByIndexElseRandom(array [, index])` 
 
@@ -92,7 +97,7 @@ Quotes.js shoudl export the following functions
     - A random element from the array If index is not passed.
     - The element in the correct index position if it is.
 
-```
+```js
 getElementByIndexElseRandom([1, 3, 4])    // any of 1 3 or 4
 getElementByIndexElseRandom([1, 3, 4], 0) // always 1
 ```
@@ -101,22 +106,10 @@ getElementByIndexElseRandom([1, 3, 4], 0) // always 1
 ##### `getQuotesFromJSON()`
 
 - Will call the callback function passed __cb__ with arguments `error, quotes`
-    - error will be null if no error occured
+    - error will be null if no error occurred
     - quotes is a list of all quotes
     
-```
-getQuotesFromDB(function (err, quotes) {
-    // any of quote object in the database  
-})
-```
-
-##### `getQuotesFromDB(cb)`
-
-- Will call the callback function passed __cb__ with arguments `error, quotes`
-    - error will be null if no error occured
-    - quotes is a list of all quotes
-    
-```
+```js
 getQuotesFromDB(function (err, quotes) {
     // any of quote object in the database  
 })
@@ -126,9 +119,32 @@ getQuotesFromDB(function (err, quotes) {
 
 - returns a random quote from the quotes.json file if index is not passed else the on int the index position.
 
-```
+```js
 getQuoteFromJSON()           // any of quote object in the quotes.json file
 getQuoteFromJSON(0).author   // Kevin Kruse
+```
+
+##### `seed(cb)`
+
+Populate the database with quotes from quotes.json, seed should call the call back when done with an `error, seeded` set of arguments.
+
+seeded is a boolean value that is true if the database was empty (and thus seeded) or no error occurred but the database already contains records.
+
+```js
+
+```
+
+
+##### `getQuotesFromDB(cb)`
+
+- Will call the callback function passed __cb__ with arguments `error, quotes`
+    - error will be null if no error occured
+    - quotes is a list of all quotes
+    
+```js
+getQuotesFromDB(function (err, quotes) {
+    // any of quote object in the database  
+})
 ```
 
 ##### `getQuoteFromDB(cb [, index])`
@@ -138,36 +154,16 @@ getQuoteFromJSON(0).author   // Kevin Kruse
     - quote should contain a random quote document returned from the database
 - Optional arguemtn index if present will select a sepcific quote by index from the quotes documents returned.
 
-```
+```js
 getQuoteFromDB(function (err, quote) {
     // any of quote object in the database  
 })
 getQuoteFromDB(function (err, quote) {
-    quote.author  // is Kevin Kruse assuming it's the first document in the database
+    // is Kevin Kruse assuming it's the first document in the database
+    quote.author;  
 }, 0)
 ```
 
-##### `seed(cb)`
-
-populate the database with quotes from quotes.json, seed should call the call back when done with an `error, seeded` set of arguments.
-
-seeded is a boolean value that is true if the database was empty (and thus seeded) or no error occured but the database already contains records.
-
-
-##### `insertQuote(quote, cb)`
-
-Insert a quote into the database and call `cb` returning  `error, quote` 
-
-##### `deleteQuote(query, cb)`
-
-Delete a quote from the database based on query and call `cb` when done
-
-
-##### `updateQuote(query, quote, cb)`
-
-Update quote in the database based on query with whatever is in quote calling `cb` when done.
-
-> Note updateQuote will always update or add whatever is in quote never replace the whole document (which is the default update behavior)
 
 #### db.js
 
@@ -179,16 +175,16 @@ clears the database used largely in testing. then call callback
 
 #### API
 
-The server needs to serve index.html when we visit `/index.html`, `index`, or just `/`. Any other url not suported should return the 404.html page
+The server needs to serve index.html when we visit `/index.html`, `index`, or just `/`. Any other url not supported should return a 404 not found.
 
-The following API endpoint shoudl exist
+The following API route endpoint should exist
 
-`/quote` returns a JSON response that was randomly selected froim the database
-`/quotes` returns a JSON array as response containing all quotes.
+`/quote` returns a JSON response that was randomly selected from the database
+`/quotes` returns a JSON array as response containing all quotes in the database.
 
-- When a user clicks on the page on index.html; a script should send a `GET` request that follows the API descripted bellow returning a random quote form the database as JSON, which in tuen is then used to update the html page.
+- When a user clicks on the page on index.html; a script should send a `GET` request that follows the API description, returning a random quote form the database as JSON, which in turn is then used to update the html page.
 
-You need to write tests as well as run a coverage test suit
+You need will to write tests as well as run a coverage test suit
 
 ### Suggestions
 
@@ -210,7 +206,7 @@ you will need to clear the database before you run tests
 you can do this by calling `before(db.clearDB)` assuming you have the following
 
 
-```
+```js
 // db.js
 
 var mongo = require('mongodb').MongoClient;
@@ -246,7 +242,7 @@ exports.clearDB = function(done) {
 
 ```
 
-```
+```js
 // tests/quotes.js
 
 var assert = require('chai').assert;
