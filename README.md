@@ -6,7 +6,7 @@ Demonstrate your mastery of:
 
 - running nodejs
 - setting up a mongodb database
-- useing express
+- using express
 - connecting to the database
 - responding with a file
 - responding with JSON
@@ -41,7 +41,7 @@ You are to __fork__ this repository and submit a pull request when you are done
 
 Your job is to create a simple test driven inspirational quotes application that will show you a new inspirational quote every-time you click on the page as well as the author of the quote in the bottom right, the quote should be loaded using ajax.
 
-The application should inform the user somehow on how he can use it, in my case I made it so that the first time the app loads starts it says on the screen that you should click/tap
+The application should inform the user somehow on how he can use it, in my case I made it so that the first time the app starts it says on the screen that you should click/tap
 
 A demo that will only work in chrome and basically just looks like what we want you to do can be found [here](http://amrdraz.github.io/inspire-me/)
 
@@ -430,3 +430,9 @@ describe('API', function() {
 
 ```
 
+
+### Meta
+
+The assignment is worth 3% of your project grade
+It is individual
+Deadline Sunday the 28th of Feb
