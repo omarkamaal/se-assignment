@@ -120,14 +120,10 @@ getElementByIndexElseRandom([1, 3, 4], 0) // always 1
 
 ##### `getQuotesFromJSON()`
 
-- Will call the callback function passed __cb__ with arguments `error, quotes`
-    - error will be null if no error occurred
-    - quotes is a list of all quotes
+- returns all the quotes as JSON
     
 ```js
-getQuotesFromDB(function (err, quotes) {
-    // any of quote object in the database  
-})
+getQuotesFromJSON() // basically returns the whole object.
 ```
 
 ##### `getQuoteFromJSON(index)`
@@ -209,10 +205,10 @@ The response should look like this which is basically what you will get from que
 
 ```json
 {
-    quote: {
-        _id: "theobjectidoftherecord",
-        text: "Nothing Comes to those who wait",
-        author: "Amr Draz"
+    "quote": {
+        "_id": "theobjectidoftherecord",
+        "text": "Nothing Comes to those who wait",
+        "author": "Amr Draz"
     }
 }
 ```
@@ -221,13 +217,13 @@ The response should look like this which is basically what you will get from que
 
 returns a JSON array as response containing all quotes in the database.
 
-```json
+```js
 [
     {
-        quote: {
-            _id: "theobjectidoftherecord",
-            text: "Nothing Comes to those who wait",
-            author: "Amr Draz"
+        "quote": {
+            "_id": "theobjectidoftherecord",
+            "text": "Nothing Comes to those who wait",
+            "author": "Amr Draz"
         }
     },
     ....
@@ -247,27 +243,37 @@ We will run our tests against your project as well as your tests against our pro
 
 We will run the coverage test using the istanbul npm package.
 
-You should achieve a coverage of level that looks like this.
+You should achieve a coverage level that looks like this.
 
 ![coverage](./assets/coverge.png)
+
+You can find this html file in a folder called coverage after you run instanbul.
 
 
 ### Some Hint and Suggestions
 
-You will need to add your dependencies in package.json
 
-For this assignment you will as a minimum use the npm packages
+#### Strategy
 
-- mocha - for testing
-- supertest - for testing the api
-- chai - for assertion
-- istanbul - for coverage
-- express - for managing your api
-- mongodb - for connecting to the database.
+As a development strategy I encourage you to build the project following the order in the test file bellow.
 
-You can look up the documentation of each of these modules and how to use them on your own.
+First without the database and server then think about connecting to the database then do the server then build the front end that connects to it.
 
-You don't need to declare a rout for each resource in express you can simply declare a static file directory to server your public folder.
+#### Other Hints
+
+- You will need to add your dependencies in package.json
+
+- For this assignment you will as a minimum use the npm packages
+    - mocha - for testing
+    - supertest - for testing the api
+    - chai - for assertion
+    - istanbul - for coverage
+    - express - for managing your api
+    - mongodb - for connecting to the database.
+
+- You can look up the documentation of each of these modules and how to use them on your own.
+
+- You don't need to declare a rout for each resource in express you can simply declare a static file directory to server your public folder.
 
 > The quote test should test all functions in quote.js
 
@@ -331,10 +337,11 @@ var Quote = require('../quotes.js');
 var db = require('../db.js');
 
 before(function(done) {
-    db.connect(function(err, db) {
-        if (err) return done(err);
-        else done();
-    });
+    // use this after you have completed the connect function
+    // db.connect(function(err, db) {
+    //    if (err) return done(err);
+    //    else done();
+    // });
 });
 
 describe("getElementByIndexElseRandom", function() {
