@@ -245,7 +245,7 @@ We will run the coverage test using the istanbul npm package.
 
 You should achieve a coverage level that looks like this.
 
-![coverage](./assets/coverge.png)
+![coverage](./assets/coverage.png)
 
 You can find this html file in a folder called coverage after you run instanbul.
 
