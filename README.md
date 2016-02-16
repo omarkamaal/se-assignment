@@ -37,6 +37,8 @@ We feel SE students will go through harsh trials in the near future, accordingly
 
 ## Task
 
+You are to __fork__ this repository and submit a pull request when you are done
+
 Your job is to create a simple test driven inspirational quotes application that will show you a new inspirational quote every-time you click on the page as well as the author of the quote in the bottom right, the quote should be loaded using ajax.
 
 The application should inform the user somehow on how he can use it, in my case I made it so that the first time the app loads starts it says on the screen that you should click/tap
@@ -53,7 +55,7 @@ A demo that will only work in chrome and basically just looks like what we want 
 
 ### File structure
 
-You are to __fork__ the assignment repo and add your own folder with your id.
+After you  __fork__ the assignment repo, add your own folder with your id.
 
 You should minimally windup with the following structure.
 
@@ -80,6 +82,7 @@ You should minimally windup with the following structure.
 |  
 |- quotes.json
 |- .gitignore
+|- README.md
 ```
 
 You will find in this repo the `.gitignore` and `quotes.json` files everything else you have to create yourself.
