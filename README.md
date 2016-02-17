@@ -43,7 +43,7 @@ Your job is to create a simple test driven inspirational quotes application that
 
 The application should inform the user somehow on how he can use it, in my case I made it so that the first time the app starts it says on the screen that you should click/tap
 
-A demo that will only work in chrome and basically just looks like what we want you to do can be found [here](http://amrdraz.github.io/inspire-me/)
+__A demo that will only work in chrome and basically just looks like what we want you to do can be found [here](http://amrdraz.github.io/inspire-me/)__
 
 > If you want to have fun you can modify the data we give you and create your own set of quotes - for example make it an Arabic movie quotes app.
 
@@ -104,10 +104,11 @@ You will find in this repo the `.gitignore` and `quotes.json` files everything e
 
 - The app must serve the data from a mongodb database.
 - The app should implement a simple GET API for getting quotes.
+- quotes.js should impliment the functions bellow
 
 #### quotes.js
 
-Quotes.js module should export the following functions
+Export the following functions
 
 ##### `getElementByIndexElseRandom(array [, index])` 
 
